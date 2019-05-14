@@ -27,7 +27,7 @@ const runExpress = () => {
   const app = express();
 
   if (process.env.NODE_ENV === "production") {
-    app.use(enforce.HTTPS({ trustProtoHeader: true }));
+    // app.use(enforce.HTTPS({ trustProtoHeader: true }));
   } else {
     app.use(morgan("tiny"));
   }
