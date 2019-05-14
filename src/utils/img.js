@@ -1,7 +1,7 @@
 const base =
   process.env.NODE_ENV !== "production"
     ? "https://res.cloudinary.com/kaungsorcerer/image/upload/v1557418796/"
-    : "";
+    : "https://res.cloudinary.com/kaungsorcerer/image/upload/v1557852869";
 
 const defaultImgUrl =
   "https://www.digitalcitizen.life/sites/default/files/styles/img_u_large/public/featured/2016-08/photo_gallery.jpg";
