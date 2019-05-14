@@ -49,7 +49,7 @@ const runExpress = () => {
 
   app.get("*", (req, res) => {
     if (process.env.DEVELOPMENT_TYPE === "BACK") {
-      return helpers.returnNotFound();
+      return helpers.returnNotFound(res);
     } else return handle(req, res);
   });
 

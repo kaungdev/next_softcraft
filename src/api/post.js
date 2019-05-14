@@ -7,6 +7,11 @@ export default {
       headers: getTokenHeader(token)
     })).json();
   },
+  getPost: async ({ req, id }) => {
+    const uri = "/api/posts?id=" + id;
+    const url = getBaseUrl(req) + uri;
+    return await (await fetch(url)).json();
+  },
   createPost: async ({ token, payload }) => {
     const url = "/api/posts";
     return await (await fetch(url, {

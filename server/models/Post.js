@@ -13,7 +13,7 @@ const postSchema = new Schema({
       // image || header || body
     }
   ],
-  isDelete: { type: Boolean, default: false },
+  isDeleted: { type: Boolean, default: false },
   createdBy: { type: Schema.Types.ObjectId, ref: "users" },
   createdAt: { type: Date, default: Date.now() }
 });
