@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 
-const AdminLayout = props => {
+const Layout = props => {
   return (
     <div>
       <AppBar position="static" color="default">
@@ -29,4 +29,4 @@ const AdminLayout = props => {
   );
 };
 
-export default AdminLayout;
+export default Layout;

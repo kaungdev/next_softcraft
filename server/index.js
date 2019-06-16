@@ -34,8 +34,8 @@ const runExpress = () => {
   app.use(bodyParser.json());
   app.use(favicon(path.join(__dirname, "public", "images", "favicon.ico")));
 
-  require("./utils/passport")();
-  require("./routes/auth")(app);
+  // require("./utils/passport")();
+  // require("./routes/auth")(app);
   require("./routes/general")(app);
   require("./routes/post")(app);
 

@@ -3,31 +3,46 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
+import { withRouter } from "next/router";
+
 import DropZone from "../../../../components/DropZone";
 import cloudinaryHelper from "../../../../src/utils/cloudinary";
-
 import utils from "../../../../src/utils";
 import AdminLayout from "../../../../components/AdminLayout";
 import api from "../../../../src/api";
-import { isNullOrUndefined } from "util";
 
-export default class index extends Component {
+class index extends Component {
   state = {
     form: {
+      _id: null,
       title: "",
       headerImg: {
         imgId: "",
         description: ""
       },
       contents: []
-    },
-    token: null
+    }
   };
 
   async componentDidMount() {
-    const token = await utils.getToken();
-    console.log("TCL: index -> componentDidMount -> token", token);
-    this.setState({ token });
+    const { id } = this.props.router.query;
+    if (!id) return;
+    const serverResponse = await api.getPost({ req: null, id });
+    if (serverResponse.status !== "success") return;
+    console.log(
+      "TCL: index -> componentDidMount -> serverResponse.data",
+      serverResponse.data
+    );
+    const { title, headerImg, contents, _id } = serverResponse.data.post;
+    console.log("TCL: index -> componentDidMount -> headerImg", headerImg);
+    this.setState({
+      form: {
+        _id,
+        title,
+        headerImg,
+        contents
+      }
+    });
   }
 
   insertNewContent = contentType => () => {
@@ -189,9 +204,8 @@ export default class index extends Component {
   };
 
   onSubmit = async () => {
-    console.log(this.state.form);
     const payload = this.state.form;
-    const response = await api.createPost({ token: this.state.token, payload });
+    const response = await api.createPost({ payload });
     console.log("TCL: onSubmit -> response", response);
   };
 
@@ -309,3 +323,5 @@ export default class index extends Component {
     );
   }
 }
+
+export default withRouter(index);

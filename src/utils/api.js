@@ -7,3 +7,8 @@ export const getTokenHeader = token => ({
   "x-access-token": token,
   "Content-Type": "application/json"
 });
+
+export const getAbsoluteUrl = ({ req, url }) => {
+  const absoluteUrl = req ? getBaseUrl(req) + url : url;
+  return absoluteUrl;
+};

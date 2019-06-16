@@ -14,7 +14,7 @@ const postSchema = new Schema({
     }
   ],
   isDeleted: { type: Boolean, default: false },
-  createdBy: { type: Schema.Types.ObjectId, ref: "users" },
+  // createdBy: { type: Schema.Types.ObjectId, ref: "users" },
   createdAt: { type: Date, default: Date.now() }
 });
 
