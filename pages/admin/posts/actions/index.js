@@ -3,7 +3,7 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
-import { withRouter } from "next/router";
+import Router, { withRouter } from "next/router";
 
 import DropZone from "../../../../components/DropZone";
 import cloudinaryHelper from "../../../../src/utils/cloudinary";
@@ -29,12 +29,7 @@ class index extends Component {
     if (!id) return;
     const serverResponse = await api.getPost({ req: null, id });
     if (serverResponse.status !== "success") return;
-    console.log(
-      "TCL: index -> componentDidMount -> serverResponse.data",
-      serverResponse.data
-    );
     const { title, headerImg, contents, _id } = serverResponse.data.post;
-    console.log("TCL: index -> componentDidMount -> headerImg", headerImg);
     this.setState({
       form: {
         _id,
@@ -44,38 +39,6 @@ class index extends Component {
       }
     });
   }
-
-  insertNewContent = contentType => () => {
-    this.setState(prevState => ({
-      form: {
-        ...prevState.form,
-        forms: [...prevState.form.forms, { value: "", contentType }]
-      }
-    }));
-  };
-
-  buildInsertButton = contentType => {
-    let title;
-    if (contentType === "body") {
-      title = "New Body";
-    }
-    return (
-      <Button onClick={this.insertNewContent(contentType)}>{title}</Button>
-    );
-  };
-
-  setContentImg = ({ imgSrc, index }) => {
-    this.setState(prevState => {
-      const newForms = [...prevState.form.forms];
-      newForms[index].imgSrc = imgSrc;
-      return {
-        form: {
-          ...prevState.form,
-          forms: newForms
-        }
-      };
-    });
-  };
 
   onDrop = ({ contentType, index }) => async acceptedFiles => {
     const file = acceptedFiles[0];
@@ -162,7 +125,9 @@ class index extends Component {
           />
         </Grid>
         <Grid item xs={1}>
-          <Button onClick={this.removeContent(index)}>Remove</Button>
+          <Button style={{ color: "red" }} onClick={this.removeContent(index)}>
+            Remove
+          </Button>
         </Grid>
       </Grid>
     );
@@ -206,7 +171,7 @@ class index extends Component {
   onSubmit = async () => {
     const payload = this.state.form;
     const response = await api.createPost({ payload });
-    console.log("TCL: onSubmit -> response", response);
+    if (response.status === "success") Router.push("/admin/posts");
   };
 
   buildContentImage = ({ contentType, index }) => {
@@ -239,7 +204,12 @@ class index extends Component {
             />
           </Grid>
           <Grid item xs={1}>
-            <Button onClick={this.removeContent(index)}>Remove</Button>
+            <Button
+              style={{ color: "red" }}
+              onClick={this.removeContent(index)}
+            >
+              Remove
+            </Button>
           </Grid>
         </Grid>
       </Grid>
@@ -298,7 +268,7 @@ class index extends Component {
   );
 
   buildSubmitButton = () => (
-    <Grid container style={{ marginTop: 16 }}>
+    <Grid container style={{ margin: "16px 0px" }}>
       <Button
         fullWidth
         variant="outlined"

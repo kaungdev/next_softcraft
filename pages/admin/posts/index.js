@@ -8,7 +8,7 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
 import Router from "next/router";
 
-import Layout from "../../../components/Layout";
+import AdminLayout from "../../../components/AdminLayout";
 import api from "../../../src/api";
 import utils from "../../../src/utils";
 
@@ -58,7 +58,7 @@ export default class index extends Component {
   render() {
     return (
       <div>
-        <Layout>{this.renderCards(this.state.posts)}</Layout>
+        <AdminLayout>{this.renderCards(this.state.posts)}</AdminLayout>
       </div>
     );
   }

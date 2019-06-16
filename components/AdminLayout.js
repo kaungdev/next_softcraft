@@ -10,9 +10,11 @@ const AdminLayout = props => {
     <div>
       <AppBar position="static" color="default">
         <Toolbar>
-          <Typography variant="h6" color="inherit">
-            SoftCraft
-          </Typography>
+          <a href="/">
+            <Typography variant="h6" color="inherit">
+              SoftCraft
+            </Typography>
+          </a>
           <div style={{ flex: 1 }} />
           <Button color="secondary">Posts</Button>
           <Button color="secondary">Create Post</Button>
