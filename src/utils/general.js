@@ -1,5 +1,4 @@
 const getSampleContent = contents => {
-  console.log("TCL: contents", contents);
   return (
     contents
       .find(content => content.contentType === "body")

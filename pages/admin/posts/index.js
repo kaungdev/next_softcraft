@@ -1,16 +1,8 @@
 import React, { Component } from "react";
-import Button from "@material-ui/core/Button";
-import Card from "@material-ui/core/Card";
-import CardMedia from "@material-ui/core/CardMedia";
-import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
-import Router from "next/router";
 
 import AdminLayout from "../../../components/AdminLayout";
 import api from "../../../src/api";
-import utils from "../../../src/utils";
+import SamplePosts from "../../../components/SamplePosts";
 
 export default class index extends Component {
   state = { posts: [] };
@@ -21,44 +13,12 @@ export default class index extends Component {
     this.setState({ posts: data.posts });
   }
 
-  renderCards = posts => {
-    return posts.map(post => (
-      <Card key={post._id}>
-        <CardActionArea>
-          <CardMedia
-            style={{ height: 150 }}
-            image={utils.getImgUrl(post.headerImg.imgId)}
-            title="Header"
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
-              {post.title}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              {utils.getSampleContent(post.contents)}
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-        <CardActions>
-          <Button
-            size="small"
-            color="primary"
-            onClick={() => Router.push("/admin/posts/actions?id=" + post._id)}
-          >
-            Edit
-          </Button>
-          <Button size="small" style={{ color: "red" }}>
-            Delete
-          </Button>
-        </CardActions>
-      </Card>
-    ));
-  };
-
   render() {
     return (
       <div>
-        <AdminLayout>{this.renderCards(this.state.posts)}</AdminLayout>
+        <AdminLayout>
+          <SamplePosts posts={this.state.posts} type="admin" />`
+        </AdminLayout>
       </div>
     );
   }
