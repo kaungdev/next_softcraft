@@ -31,7 +31,7 @@
     "localforage": "^1.7.3",
     "mongoose": "^5.4.22",
     "morgan": "^1.9.1",
-    "next": "^8.0.4",
+    "next": "^9.3.3",
     "passport": "^0.4.0",
     "passport-facebook-token": "^3.3.0",
     "react": "^16.8.6",
